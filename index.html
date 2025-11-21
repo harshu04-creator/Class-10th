@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 10 Board Papers | 2015-2026</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .description {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .subject-card .icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .subject-card h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .subject-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .years-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .year-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .year-card:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .year-card h3 {
+            font-size: 1.8rem;
+            color: inherit;
+        }
+
+        /* Special style for 2026 with badge */
+        .year-2026 {
+            position: relative;
+            border: 3px solid #667eea;
+        }
+
+        .year-2026::after {
+            content: "📋 Multiple Sets";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Sets selection page */
+        .sets-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .set-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .set-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .set-card .set-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .set-card h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .set-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .model-paper {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .model-paper h3 {
+            color: white;
+        }
+
+        .model-paper p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            background: white;
+            transform: translateX(-5px);
+        }
+
+        .pdf-viewer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .pdf-header {
+            margin-bottom: 20px;
+        }
+
+        .pdf-header h2 {
+            color: #667eea;
+            margin-top: 10px;
+        }
+
+        #pdf-frame {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            background: #f5f5f5;
+            border: 2px solid #667eea;
+        }
+
+        .pdf-download {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            opacity: 0.8;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .years-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sets-container {
+                grid-template-columns: 1fr;
+            }
+            
+            #pdf-frame {
+                height: 400px;
+            }
+
+            .year-2026::after {
+                font-size: 0.6rem;
+                padding: 3px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home-page">
+            <header>
+                <h1>📚 Class 10 Board Question Papers</h1>
+                <p class="subtitle">Previous Year Papers (2015-2026)</p>
+                <p class="description">Access all subjects' question papers to prepare better for your exams</p>
+            </header>
+
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="showYears('hindi', 'Hindi (हिंदी)')">
+                    <div class="icon">📖</div>
+                    <h2>Hindi</h2>
+                    <p>हिंदी</p>
+                </div>
+
+                <div class="subject-card" onclick="showYears('english', 'English')">
+                    <div class="icon">📝</div>
+                    <h2>English</h2>
+                    <p>Language & Literature</p>
+                </div>
+
+                <div class="subject-card" onclick="showYears('math', 'Mathematics (गणित)')">
+                    <div class="icon">🔢</div>
+                    <h2>Mathematics</h2>
+                    <p>गणित</p>
+                </div>
+
+                <div class="subject-card" onclick="showYears('science', 'Science (विज्ञान)')">
+                    <div class="icon">🔬</div>
+                    <h2>Science</h2>
+                    <p>विज्ञान</p>
+                </div>
+
+                <div class="subject-card" onclick="showYears('sst', 'Social Science (सामाजिक विज्ञान)')">
+                    <div class="icon">🌍</div>
+                    <h2>Social Science</h2>
+                    <p>सामाजिक विज्ञान</p>
+                </div>
+            </div>
+
+            <footer>
+                <p>Made with ❤️ for students | All papers are for educational purposes</p>
+            </footer>
+        </div>
+
+        <!-- Years Page -->
+        <div id="years-page" class="hidden">
+            <header>
+                <button class="back-btn" onclick="goHome()">← Back to Subjects</button>
+                <h1 id="subject-title">Question Papers</h1>
+            </header>
+
+            <div class="years-container" id="years-container">
+                <!-- Years will be populated by JavaScript -->
+            </div>
+
+            <footer>
+                <p>Made with ❤️ for students</p>
+            </footer>
+        </div>
+
+        <!-- 2026 Sets Selection Page -->
+        <div id="sets-page" class="hidden">
+            <header>
+                <button class="back-btn" onclick="backToYears()">← Back to Years</button>
+                <h1 id="sets-title">Select Paper Set - 2026</h1>
+            </header>
+
+            <div class="sets-container">
+                <div class="set-card" onclick="openPDFSet('set1')">
+                    <div class="set-icon">📄</div>
+                    <h3>Set 1</h3>
+                    <p>Question Paper Set 1</p>
+                </div>
+
+                <div class="set-card" onclick="openPDFSet('set2')">
+                    <div class="set-icon">📄</div>
+                    <h3>Set 2</h3>
+                    <p>Question Paper Set 2</p>
+                </div>
+
+                <div class="set-card model-paper" onclick="openPDFSet('model')">
+                    <div class="set-icon">⭐</div>
+                    <h3>Model Paper</h3>
+                    <p>Practice Model Paper</p>
+                </div>
+            </div>
+
+            <footer>
+                <p>Made with ❤️ for students</p>
+            </footer>
+        </div>
+
+        <!-- PDF Viewer Page -->
+        <div id="pdf-page" class="hidden">
+            <div class="pdf-viewer">
+                <div class="pdf-header">
+                    <button class="back-btn" onclick="backToPrevious()">← Back</button>
+                    <h2 id="pdf-title"></h2>
+                </div>
+                <iframe id="pdf-frame" src=""></iframe>
+                <div class="pdf-download">
+                    <a id="download-link" href="" download>
+                        <button class="download-btn">📥 Download PDF</button>
+                    </a>
+                </div>
+            </div>
+
+            <footer style="margin-top: 20px;">
+                <p>Made with ❤️ for students</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        let currentSubject = '';
+        let currentSubjectName = '';
+        let previousPage = 'years'; // Track which page to go back to
+
+        function showYears(subject, subjectName) {
+            currentSubject = subject;
+            currentSubjectName = subjectName;
+            
+            document.getElementById('home-page').classList.add('hidden');
+            document.getElementById('years-page').classList.remove('hidden');
+            document.getElementById('subject-title').textContent = subjectName + ' Question Papers';
+            
+            const yearsContainer = document.getElementById('years-container');
+            yearsContainer.innerHTML = '';
+            
+            // Generate years from 2026 to 2015
+            for (let year = 2026; year >= 2015; year--) {
+                const yearCard = document.createElement('div');
+                yearCard.className = 'year-card';
+                
+                // Add special class for 2026
+                if (year === 2026) {
+                    yearCard.classList.add('year-2026');
+                }
+                
+                yearCard.innerHTML = `<h3>${year}</h3>`;
+                yearCard.onclick = function() {
+                    if (year === 2026) {
+                        show2026Sets(subject, subjectName);
+                    } else {
+                        openPDF(subject, year, subjectName);
+                    }
+                };
+                yearsContainer.appendChild(yearCard);
+            }
+        }
+
+        function show2026Sets(subject, subjectName) {
+            document.getElementById('years-page').classList.add('hidden');
+            document.getElementById('sets-page').classList.remove('hidden');
+            document.getElementById('sets-title').textContent = `${subjectName} - 2026 Papers`;
+            previousPage = 'years';
+        }
+
+        function openPDFSet(setType) {
+            const setNames = {
+                'set1': 'Set 1',
+                'set2': 'Set 2',
+                'model': 'Model Paper'
+            };
+            
+            const pdfPath = `papers/${currentSubject}/2026_${setType}.pdf`;
+            
+            document.getElementById('sets-page').classList.add('hidden');
+            document.getElementById('pdf-page').classList.remove('hidden');
+            
+            document.getElementById('pdf-title').textContent = `${currentSubjectName} - 2026 (${setNames[setType]})`;
+            document.getElementById('pdf-frame').src = pdfPath;
+            document.getElementById('download-link').href = pdfPath;
+            document.getElementById('download-link').download = `${currentSubject}_2026_${setType}.pdf`;
+            
+            previousPage = 'sets';
+        }
+
+        function openPDF(subject, year, subjectName) {
+            document.getElementById('years-page').classList.add('hidden');
+            document.getElementById('pdf-page').classList.remove('hidden');
+            
+            const pdfPath = `papers/${subject}/${year}.pdf`;
+            
+            document.getElementById('pdf-title').textContent = `${subjectName} - ${year} Question Paper`;
+            document.getElementById('pdf-frame').src = pdfPath;
+            document.getElementById('download-link').href = pdfPath;
+            document.getElementById('download-link').download = `${subject}_${year}.pdf`;
+            
+            previousPage = 'years';
+        }
+
+        function backToPrevious() {
+            document.getElementById('pdf-page').classList.add('hidden');
+            
+            if (previousPage === 'sets') {
+                document.getElementById('sets-page').classList.remove('hidden');
+            } else {
+                document.getElementById('years-page').classList.remove('hidden');
+            }
+        }
+
+        function backToYears() {
+            document.getElementById('sets-page').classList.add('hidden');
+            document.getElementById('years-page').classList.remove('hidden');
+        }
+
+        function goHome() {
+            document.getElementById('years-page').classList.add('hidden');
+            document.getElementById('sets-page').classList.add('hidden');
+            document.getElementById('pdf-page').classList.add('hidden');
+            document.getElementById('home-page').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
